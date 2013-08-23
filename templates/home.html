@@ -1,5 +1,12 @@
 {% extends 'layout.html' %}
 {% block content %}
+<div class="errors">
+    <ul>
+        {% for error in errors %}
+            <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+</div>
     <form action="/results" method="post">
         <div name="form_field">
             <label for="meal_cost">Meal cost:</label>
