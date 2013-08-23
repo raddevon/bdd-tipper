@@ -3,6 +3,12 @@ from flask import Flask, render_template, request
 app = Flask(__name__)
 
 
+def format_currency(value):
+    return "${:,.2f}".format(value)
+
+app.jinja_env.filters['currency'] = format_currency
+
+
 @app.route('/')
 def home():
     return render_template('home.html')
