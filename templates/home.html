@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 {% block content %}
-<div class="errors">
+<div id="errors" style="{% if not errors %}display: none;{% endif %}background: red; color: white;">
     <ul>
         {% for error in errors %}
             <li>{{ error }}</li>
