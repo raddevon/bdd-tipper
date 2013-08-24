@@ -23,7 +23,8 @@ def step_impl(context):
 def step_impl(context, field, value):
     br = context.browser
     field = br.find_element_by_name(field)
-    field.send_keys(value)
+    if value != "(blank)":
+        field.send_keys(value)
 
 
 @when(u'I click submit')
