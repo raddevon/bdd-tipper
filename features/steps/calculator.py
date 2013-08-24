@@ -43,3 +43,10 @@ def step_impl(context, result):
     br = context.browser
     results_el = br.find_element_by_id('results')
     assert result in results_el.text
+
+
+@then(u'I should see an error')
+def step_impl(context):
+    br = context.browser
+    error_el = br.find_element_by_id('errors')
+    assert error_el.text and error_el.is_displayed()
