@@ -16,8 +16,31 @@ def home():
 
 @app.route('/results', methods=['POST'])
 def results():
-    result = float(request.form['meal_cost']) * \
-        (float(request.form['tip_percentage']) / 100)
+    context = {'errors': []}
+
+    try:
+        assert float(request.form['meal_cost']) > 0
+        meal_cost = float(request.form['meal_cost'])
+        context['meal_cost'] = request.form['meal_cost']
+    except ValueError:
+        context['errors'].append('The meal cost must be numeric.')
+    except AssertionError:
+        context['errors'].append('The meal cost must be greater than 0.')
+
+    try:
+        assert float(request.form['tip_percentage']) >= 0
+        tip_percentage = float(request.form['tip_percentage'])
+        context['tip_percentage'] = request.form['tip_percentage']
+    except ValueError:
+        context['errors'].append('The tip percentage must be numeric.')
+    except AssertionError:
+        context['errors'].append('The tip percentage cannot be negative.')
+
+    try:
+        result = meal_cost * (tip_percentage / 100)
+    except (ValueError, UnboundLocalError):
+        return render_template('home.html', **context)
+
     return render_template('results.html', result=result)
 
 if __name__ == '__main__':
