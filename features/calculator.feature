@@ -50,7 +50,7 @@ Feature: Confirming that the tip calculator form displays
 
     Scenario: Try to use a blank meal cost
         When I go to the tip calculator
-        And I enter a <meal_cost> of ""
+        And I enter a <meal_cost> of "(blank)"
         And I enter a <tip_percentage> of "20"
         And I click submit
         Then I should see the calculator form
@@ -59,7 +59,7 @@ Feature: Confirming that the tip calculator form displays
     Scenario: Try to use a blank tip percentage
         When I go to the tip calculator
         And I enter a <meal_cost> of "50"
-        And I enter a <tip_percentage> of ""
+        And I enter a <tip_percentage> of "(blank)"
         And I click submit
         Then I should see the calculator form
         And I should see an error
